@@ -14,9 +14,10 @@ public class Home {
 		Tecnico tc = new Tecnico();
 		Array_List ar = new Array_List();
 		// Enter para continuar
+		
 		System.out.println("****************************************************************");
 		System.out.println("|                          Bem Vindo!                          |");
-		System.out.println("|            Serralharia Nossa Senhora da Conceiï¿½ï¿½o            |");
+		System.out.println("|            Serralharia Nossa Senhora da Conceição            |");
 		System.out.println("****************************************************************");
 
 		for(int i = 0; i < 1; i++) {
@@ -26,12 +27,13 @@ public class Home {
 		}
 		// Fim enter para continuar
 		//inicio menu
-		System.out.println("Selecione a opï¿½ï¿½o de acesso:\n  1- CLIENTE | 2-Tï¿½CNICO\nOPï¿½ï¿½O:");
+		System.out.println("Selecione a opção de acesso:\n  1- CLIENTE | 2-TÉCNICO\nOPÇÃO:");
 		int menu = menu = new Scanner(System.in).nextInt();
 
 		switch (menu) {
 
 		case 1: 
+			
 			Scanner end = new Scanner (System.in);
 			System.out.println("              CADASTRO            "
 					+ "\nCadastre-se para Realizar um Pedido");
@@ -50,7 +52,7 @@ public class Home {
 			clin.setCpf(dadosc.nextLine());
 			ar.getDados().add(clin.getCpf());
 
-			System.out.println("____________ ENDEREï¿½O ____________");
+			System.out.println("____________ ENDEREÇO ____________");
 
 			System.out.println("Estado: ");
 			endereco.setEstado(dadosc.nextLine());
@@ -81,13 +83,13 @@ public class Home {
 			ar.getDados().add(endereco.getCep());
 			//pedido
 			System.out.println("****************************************************************");
-			System.out.println("|                          SERVIï¿½O                             |");
+			System.out.println("|                          SERVIÇO                             |");
 			System.out.println("****************************************************************");
 
 			Pedido pedido = new Pedido(menu);
 
-			System.out.println("TIPO DE SERVIï¿½O A SER EXECUTADO ");
-			System.out.println("1- JANELA| 2- PORTA  | 3 - PORTï¿½O | 4 - TOLDO");
+			System.out.println("TIPO DE SERVIÇO A SER EXECUTADO ");
+			System.out.println("1- JANELA| 2- PORTA  | 3 - PORTÃO | 4 - TOLDO");
 			pedido.settipopedido(dadosc.nextInt());
 
 			Scanner orcamento = new Scanner(System.in);
@@ -131,28 +133,36 @@ public class Home {
 				System.out.println(clin.getNome());
 				System.out.println(clin.getCpf());    
 				System.out.println(clin.getTelefone());
-				System.out.println("\nEndereï¿½o:\n");
+				System.out.println("\nEndereço:\n");
 				System.out.println(endereco.getEstado()+" "+endereco.getCidade());
 				System.out.println(endereco.getBairro()+" "+endereco.getRua());
 				System.out.println(endereco.getNumero());
 				System.out.println(endereco.getCep());
 				System.out.println(endereco.getPontRefe());
+				
+				
+				
 				System.out.println("\n----------------------------------------------------------------");
-				System.out.println("|                          SERVIï¿½O                             |");
+				System.out.println("|                          SERVIÇOS                              |");
 				System.out.println("----------------------------------------------------------------\n");
+				
+				
+				
 				System.out.println("A ser Fabricado:"+ pedido.gettipopedido());
 				System.out.println("Altura: "+orc.getAltura()+" m");
 				System.out.println("Largura: "+orc.getLargura()+" m");
 				System.out.println(orc.getMetrosqd() +" mï¿½");		
+				
+				
 				System.out.println("\n----------------------------------------------------------------");
 				System.out.println("|                         REMETENTE                            |");
 				System.out.println("----------------------------------------------------------------");
-				System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEIï¿½ï¿½O");
-				System.out.println("Av. Uninassau Graï¿½as");
-				System.out.println("Nï¿½ 114          CEP: 52011-210");
-				System.out.println("Graï¿½as, Recife - PE");
+				System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEIÇÃO");
+				System.out.println("Av. Uninassau Graças");
+				System.out.println("Nº 114          CEP: 52011-210");
+				System.out.println("Graças, Recife - PE");
 				System.out.println("X--------------------------------------------------------------X");
-				System.out.println("Serviï¿½o Solicitado com sucesso...");
+				System.out.println("Serviço Solicitado com sucesso...");
 				
 			}if(fpg.getTipopagamento() == 2) {
 				System.out.println("----------------------------------------------------------------");
@@ -162,28 +172,30 @@ public class Home {
 				System.out.println(clin.getNome());
 				System.out.println(clin.getCpf());    
 				System.out.println(clin.getTelefone());
-				System.out.println("\nEndereï¿½o:\n");
+				System.out.println("\nEndereço:\n");
 				System.out.println(endereco.getEstado()+" "+endereco.getCidade());
 				System.out.println(endereco.getBairro()+" "+endereco.getRua());
 				System.out.println(endereco.getNumero());
 				System.out.println(endereco.getCep());
 				System.out.println(endereco.getPontRefe());
+				
+				
 				System.out.println("\n----------------------------------------------------------------");
-				System.out.println("|                          SERVIï¿½O                             |");
+				System.out.println("|                          SERVIÇOS                             |");
 				System.out.println("----------------------------------------------------------------\n");
 				System.out.println("A ser Fabricado:"+ pedido.gettipopedido());
 				System.out.println("Altura: "+orc.getAltura()+" m");
 				System.out.println("Largura: "+orc.getLargura()+" m");
-				System.out.println(orc.getMetrosqd() +" mï¿½");		
+				System.out.println(orc.getMetrosqd() +" m2");		
 				System.out.println("\n----------------------------------------------------------------");
 				System.out.println("|                         REMETENTE                            |");
 				System.out.println("----------------------------------------------------------------");
-				System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEIï¿½ï¿½O");
-				System.out.println("Av. Uninassau Graï¿½as");
-				System.out.println("Nï¿½ 114          CEP: 52011-210");
-				System.out.println("Graï¿½as, Recife - PE");
+				System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEIÇÃO");
+				System.out.println("Av. Uninassau Graças");
+				System.out.println("Nº 114          CEP: 52011-210");
+				System.out.println("Graças, Recife - PE");
 				System.out.println("X--------------------------------------------------------------X");
-				System.out.println("Serviï¿½o Solicitado com sucesso...");
+				System.out.println("Serviço Solicitado com sucesso...");
 			}if(fpg.getTipopagamento() == 3) {	
 				System.out.println("----------------------------------------------------------------");
 				System.out.println("|                     DESTINATARIO                             |");
@@ -192,28 +204,28 @@ public class Home {
 				System.out.println(clin.getNome());
 				System.out.println(clin.getCpf());    
 				System.out.println(clin.getTelefone());
-				System.out.println("\nEndereï¿½o:\n");
+				System.out.println("\nEndereço:\n");
 				System.out.println(endereco.getEstado()+" "+endereco.getCidade());
 				System.out.println(endereco.getBairro()+" "+endereco.getRua());
 				System.out.println(endereco.getNumero());
 				System.out.println(endereco.getCep());
 				System.out.println(endereco.getPontRefe());
 				System.out.println("\n----------------------------------------------------------------");
-				System.out.println("|                          SERVIï¿½O                             |");
+				System.out.println("|                           SERVIÇO                              |");
 				System.out.println("----------------------------------------------------------------\n");
 				System.out.println("A ser Fabricado:"+ pedido.gettipopedido());
 				System.out.println("Altura: "+orc.getAltura()+" m");
 				System.out.println("Largura: "+orc.getLargura()+" m");
-				System.out.println(orc.getMetrosqd() +" mï¿½");		
+				System.out.println(orc.getMetrosqd() +" m2");		
 				System.out.println("\n----------------------------------------------------------------");
 				System.out.println("|                         REMETENTE                            |");
 				System.out.println("----------------------------------------------------------------");
-				System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEIï¿½ï¿½O");
-				System.out.println("Av. Uninassau Graï¿½as");
-				System.out.println("Nï¿½ 114          CEP: 52011-210");
-				System.out.println("Graï¿½as, Recife - PE");
+				System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEIÇÃO");
+				System.out.println("Av. Uninassau Graças");
+				System.out.println("Nº 114          CEP: 52011-210");
+				System.out.println("Graças, Recife - PE");
 				System.out.println("X--------------------------------------------------------------X");
-				System.out.println("Serviï¿½o Solicitado com sucesso...");
+				System.out.println("Serviço Solicitado com sucesso...");
 		
 			}if(fpg.getTipopagamento() == 2) {
 				System.out.println("----------------------------------------------------------------");
@@ -223,28 +235,28 @@ public class Home {
 				System.out.println(clin.getNome());
 				System.out.println(clin.getCpf());    
 				System.out.println(clin.getTelefone());
-				System.out.println("\nEndereï¿½o:\n");
+				System.out.println("\nEndereço:\n");
 				System.out.println(endereco.getEstado()+" "+endereco.getCidade());
 				System.out.println(endereco.getBairro()+" "+endereco.getRua());
 				System.out.println(endereco.getNumero());
 				System.out.println(endereco.getCep());
 				System.out.println(endereco.getPontRefe());
 				System.out.println("\n----------------------------------------------------------------");
-				System.out.println("|                          SERVIï¿½O                             |");
+				System.out.println("|                          SERVIÇO                               |");
 				System.out.println("----------------------------------------------------------------\n");
 				System.out.println("A ser Fabricado:"+ pedido.gettipopedido());
 				System.out.println("Altura: "+orc.getAltura()+" m");
 				System.out.println("Largura: "+orc.getLargura()+" m");
-				System.out.println(orc.getMetrosqd() +" mï¿½");		
+				System.out.println(orc.getMetrosqd() +" m2");		
 				System.out.println("\n----------------------------------------------------------------");
 				System.out.println("|                         REMETENTE                            |");
 				System.out.println("----------------------------------------------------------------");
-				System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEIï¿½ï¿½O");
-				System.out.println("Av. Uninassau Graï¿½as");
-				System.out.println("Nï¿½ 114          CEP: 52011-210");
-				System.out.println("Graï¿½as, Recife - PE");
+				System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEIÇÃO");
+				System.out.println("Av. Uninassau Graças");
+				System.out.println("Nº 114          CEP: 52011-210");
+				System.out.println("Graças, Recife - PE");
 				System.out.println("X--------------------------------------------------------------X");
-				System.out.println("Serviï¿½o Solicitado com sucesso...");
+				System.out.println("Serviïço Solicitado com sucesso...");
 			}if(fpg.getTipopagamento()<=0 || fpg.getTipopagamento()>3 ) {
 				System.out.println("TIPO DE PAGAMENTO INVALIDO!!");
 				
@@ -266,13 +278,13 @@ public class Home {
 			case 2:
 				Scanner acess = new Scanner(System.in);
 				System.out.println("\n----------------------------------------------------------------");
-				System.out.println("|                        SETOR Tï¿½CNICO                           |");
+				System.out.println("|                        SETOR TÉCNICO                           |");
 				System.out.println("----------------------------------------------------------------\n");
 				System.out.println("CODIGO DE ACESSO: ");
 				double login = acess.nextDouble();
 				if (tc.getCodcesso()==login) {
 					System.out.println("\n----------------------------------------------------------------");
-					System.out.println("|                        SETOR Tï¿½CNICO                           |");
+					System.out.println("|                        SETOR TÉCNICO                           |");
 					System.out.println("----------------------------------------------------------------\n");
 					System.out.println("Responsaveis:");
 					System.out.println(tecnic.getNome());
@@ -281,7 +293,7 @@ public class Home {
 					System.out.println(pedido.gettipopedido());
 					System.out.println(orc.getAltura()+" m");
 					System.out.println(orc.getLargura()+" m");
-					System.out.println(orc.getMetrosqd() +" mï¿½");	
+					System.out.println(orc.getMetrosqd() +" m2");	
 					System.out.println("\nTIPO DE MATERIAL (1 ANODIZADO | 2 BRANCO ANODIZADO)");
 					System.out.println(orc.getTipmaterial());
 					System.out.println("\nCLIENTE: "+clin.getNome());
@@ -292,13 +304,13 @@ public class Home {
 		case 2:
 			Scanner acess = new Scanner(System.in);
 			System.out.println("\n----------------------------------------------------------------");
-			System.out.println("|                        SETOR Tï¿½CNICO                           |");
+			System.out.println("|                        SETOR TÉCNICO                           |");
 			System.out.println("----------------------------------------------------------------\n");
 			System.out.println("CODIGO DE ACESSO: ");
 			double login = acess.nextDouble();
 			if (tc.getCodcesso()==login) {
 				System.out.println("\n----------------------------------------------------------------");
-				System.out.println("|                        SETOR Tï¿½CNICO                           |");
+				System.out.println("|                        SETOR TÉCNICO                           |");
 				System.out.println("----------------------------------------------------------------\n");
 				System.out.println("Responsaveis:");
 				System.out.println(tecnic.getNome());
@@ -306,13 +318,13 @@ public class Home {
 				System.out.println("\nA SER FABRICADO:\n");
 				System.out.println(orc.getAltura()+" m");
 				System.out.println(orc.getLargura()+" m");
-				System.out.println(orc.getMetrosqd() +" mï¿½");	
+				System.out.println(orc.getMetrosqd() +" m2");	
 
 				System.out.println("\nTIPO DE MATERIAL (1 ANODIZADO | 2 BRANCO ANODIZADO)");
 				System.out.println(orc.getTipmaterial());
 				System.out.println("Nome do Cliente: "+ clin.getNome());
 				System.out.println("\n"+tecnic.toString());
-				System.out.println("\nPOR Nï¿½O HAVER BANCO Nï¿½O EXISTE DADOS EXISTENTE ANTES DE INSERIR DADOS");
+				System.out.println("\nPOR NÃO HAVER BANCO NÃO EXISTE DADOS EXISTENTE ANTES DE INSERIR DADOS");
 			}
 		}
 	}
