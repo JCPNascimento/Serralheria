@@ -2,6 +2,7 @@ package Serralheria;
 
 public class Endereco {
 	
+	private int id;
 	private String rua;
 	private String PontRefe;
 	private String estado;
@@ -84,6 +85,14 @@ public class Endereco {
 	@Override
 	public String toString() {
 		return"[ "+getCep()+" "+getEstado()+" "+getCidade()+" "+getBairro()+" "+getNumero()+" "+getPontRefe();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }
 

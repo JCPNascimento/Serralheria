@@ -2,9 +2,11 @@ package Serralheria;
 
 public class Pessoa {
 
+	private int id;
 	private String nome;
 	private String telefone;
 	private String Cpf;
+	private Endereco endereco;
 	
 	public Pessoa() {	
 		this.telefone = null;
@@ -31,5 +33,17 @@ public class Pessoa {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	public Endereco getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}	
 }
