@@ -191,6 +191,7 @@ public class Home {
 				String bar = dadosc.nextLine();
 				val = validarcodigo(bar);
 				endereco.setBairro(bar);
+				
 			}while(val);
 			//			endereco.setBairro(dadosc.nextLine());
 			ar.find().add(endereco.getBairro());
