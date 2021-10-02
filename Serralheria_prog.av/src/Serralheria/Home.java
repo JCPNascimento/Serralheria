@@ -72,9 +72,7 @@ public class Home {
 
 			boolean validarnome = false;
 			String nome;
-
 			do {
-
 				validarnome = false;
 
 				System.out.println("NOME E SOBRENOME: ");
@@ -116,17 +114,16 @@ public class Home {
 				valnum = validarCodigoNumber(aux);
 
 				clin.setTelefone(aux);
-				clin.setTelefone(dadosc.nextLine());
 				ar.find().add(clin.getTelefone());
 
 			}while(valnum);
-
 
 			do {
 				do {
 					count = 0;
 					System.out.println("CPF: ");
-					aux = dadosc.nextLine();clin.setCpf(dadosc.nextLine());
+					aux = dadosc.nextLine(); //sair quebra exessao
+					clin.setCpf(aux);
 					if(aux.length() != 11) {
 						System.out.println("*******************************************");
 						System.out.println("Minimo 11 digitos");
@@ -137,10 +134,9 @@ public class Home {
 				valnum = validarCodigoNumber(aux);
 				clin.setTelefone(aux);
 
-				//   clin.setCpf(dadosc.nextLine());
+				//  clin.setCpf(dadosc.nextLine());
 				ar.find().add(clin.getCpf());
 			}while(valnum);
-
 
 			System.out.println("Itens da lista:");
 			System.out.println(ar.find());
@@ -152,7 +148,6 @@ public class Home {
 			System.out.println("Itens da lista:");
 			System.out.println(ar.find());
 
-
 			System.out.println("Insira o item a ser procurado na lista:");
 			String searchString = dadosc.nextLine();
 
@@ -163,7 +158,6 @@ public class Home {
 			}
 
 			System.out.println(ar.listClone);
-
 
 			System.out.println("____________ ENDERECO ____________");
 
@@ -191,7 +185,7 @@ public class Home {
 				String bar = dadosc.nextLine();
 				val = validarcodigo(bar);
 				endereco.setBairro(bar);
-				
+
 			}while(val);
 			//			endereco.setBairro(dadosc.nextLine());
 			ar.find().add(endereco.getBairro());
@@ -639,11 +633,8 @@ public class Home {
 			System.out.println("*******************************************");
 
 			validarcodigo = true;
-
 		}
-
 		return validarcodigo;
-
 	}
 
 	public static boolean validarCodigoNumber(String codigo) {
@@ -661,6 +652,5 @@ public class Home {
 		}
 
 		return validarCodigo;
-
 	}
 }
