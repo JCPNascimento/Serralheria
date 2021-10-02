@@ -31,7 +31,7 @@ public class FormaPagamento implements Calculos {
 		switch (tipopagamento) {
 		case 1: 
 			System.out.println("*************************** CREDITO ****************************");
-			System.out.println("OBS: A PARTIR DE 4X NO CARTï¿½O ADICIONAL DE 7%");
+			System.out.println("OBS: A PARTIR DE 4X NO CARTÃO ADICIONAL DE 7%");
 			System.out.println("CREDITO: ATE 10X ");
 			System.out.println("QUANTIDADE DE PARCELAS ?");
 			break;

@@ -26,7 +26,7 @@ public class Pedido {
 			System.out.println("PORTA");
 		}
 		if(tipopedido==3) {
-			System.out.println("PORTï¿½O");
+			System.out.println("PORTÃO");
 		}
 		if(tipopedido==4) {
 			System.out.println("TOLDO");

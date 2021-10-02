@@ -12,7 +12,6 @@ public class InsertBanco {
 	private Connection connection;
 	
 	public InsertBanco() {
-
 	//	try {
 	//		this.connection = new ConnectionFactory().getConnection();
 	//	} catch (SQLException e) {
@@ -20,7 +19,6 @@ public class InsertBanco {
 	//	}
 
 	}
-	
 	public void salvarPessoa(Pessoa pessoa) {
 		try {
 
@@ -36,10 +34,8 @@ public class InsertBanco {
 			throw new RuntimeException(e);
 		}
 	}
-	
 	public void salvarEndereco(Endereco endereco) {
 		try {
-
 			String sql = "INSERT INTO ENDERECO (RUA,PONTO_REFERENCIA,ESTADO,CIDADE,BAIRRO,NUMERO,CEP) VALUES (?,?,?,?,?,?,?)";
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, endereco.getRua());
@@ -55,10 +51,8 @@ public class InsertBanco {
 			throw new RuntimeException(e);
 		}
 	}
-	
 	public void salvarCliente(Cliente cliente) {
 		try {
-
 			String sql = "INSERT INTO CLIENTE (CPF,TELEFONE,ID_ENDERECO) VALUES (?,?,?)";
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, cliente.getCpf());
@@ -70,10 +64,8 @@ public class InsertBanco {
 			throw new RuntimeException(e);
 		}
 	}
-	
 	public void salvarTecnico(Tecnico tecnico) {
 		try {
-
 			String sql = "INSERT INTO TECNICO (NOME,TELEFONE,CPF,CODIGO_ACESSO) VALUES (?,?,?,?)";
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, tecnico.getNome());
@@ -88,7 +80,6 @@ public class InsertBanco {
 	}
 	public void salvarOrcamento(Orcamento orcamento) {
 		try {
-
 			String sql = "INSERT INTO ORCAMENTO (ALUMINIO,ALTURA,LARGURA,METROS,TIPO_MATERIAL,TOTAL) VALUES (?,?,?,?,?,?)";
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setDouble(1, orcamento.get$aluminio());
@@ -119,6 +110,4 @@ public class InsertBanco {
 			throw new RuntimeException(e);
 		}
 	}
-	
-
 }

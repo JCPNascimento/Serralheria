@@ -16,13 +16,12 @@ public class Home {
 		Tecnico tc = new Tecnico();
 		Dados ar = new Dados();
 
-
 		int n = 0;
 
 		// Enter para continuar
 		System.out.println("****************************************************************");
 		System.out.println("|                          Bem Vindo!                          |");
-		System.out.println("|            Serralharia Nossa Senhora da Concei��o            |");
+		System.out.println("|            Serralharia Nossa Senhora da Conceição            |");
 		System.out.println("****************************************************************");
 
 		for(int i = 0; i < 1; i++) {
@@ -39,11 +38,11 @@ public class Home {
 			do {
 
 				try {
-					System.out.println("Selecione a op��o de acesso:\n  1- CLIENTE | 2-T�CNICO\nOP��O:");
+					System.out.println("Selecione a opção de acesso:\n  1- CLIENTE | 2-TÉCNICO\nOPÇÃO:");
 					menu = m.nextInt();	
 				} catch (InputMismatchException e) {
 					System.out.println("*******************************************");
-					System.out.println("Ops, Digite um c�digo valido.");
+					System.out.println("Ops, Digite um código valido.");
 					System.out.println("*******************************************");
 				}
 				m.nextLine();
@@ -51,9 +50,9 @@ public class Home {
 			} while( menu == 0);
 
 			if(menu != 1 && menu != 2) {
-				System.out.println("*******************************************");
-				System.out.println("Ops... Digite 1 para Cliente ou 2 Para Tecnico");
-				System.out.println("*******************************************");
+				System.out.println("*********************************************");
+				System.out.println("Ops...Digite 1 para Cliente ou 2 Para Tecnico");
+				System.out.println("*********************************************");
 			}
 
 		} while(menu != 1 && menu != 2);
@@ -86,7 +85,7 @@ public class Home {
 
 				if (ma.find()) {
 					System.out.println("*******************************************");
-					System.out.println("voce n�o pode inserir n�meros neste campo!");
+					System.out.println("voce não pode inserir números neste campo! ");
 					System.out.println("*******************************************");
 
 					validarnome = true;
@@ -250,14 +249,14 @@ public class Home {
 
 				try {
 
-					System.out.println("Quantos Servi�os ser�o feitos ?");
+					System.out.println("Quantos Serviços serão feitos ?");
 					Scanner s = new Scanner(System.in);
 					n = s.nextInt();
 					j++;
 				}catch(InputMismatchException e){
 
 					System.out.println("****************************************************************");
-					System.out.println("Ops, Digite um n�mero valido.");
+					System.out.println("Ops, Digite um número valido.");
 					System.out.println("****************************************************************");
 
 				}
@@ -279,7 +278,7 @@ public class Home {
 					}catch(InputMismatchException e){
 
 						System.out.println("****************************************************************");
-						System.out.println("Ops, Digite um n�mero valido.");
+						System.out.println("Ops, Digite um número valido.");
 						System.out.println("****************************************************************");
 
 					}
@@ -425,12 +424,12 @@ public class Home {
 					System.out.println("\n----------------------------------------------------------------");
 					System.out.println("|                         REMETENTE                            |");
 					System.out.println("----------------------------------------------------------------");
-					System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEI��O");
-					System.out.println("Av. Uninassau Gra�as");
+					System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEIÇÂO");
+					System.out.println("Av. Uninassau Graças");
 					System.out.println("N� 114          CEP: 52011-210");
-					System.out.println("Gra�as, Recife - PE");
+					System.out.println("Graças, Recife - PE");
 					System.out.println("X--------------------------------------------------------------X");
-					System.out.println("Servi�o Solicitado com sucesso...");
+					System.out.println("Serviço Solicitado com sucesso...");
 
 				}if(fpg.getTipopagamento() == 2) {
 					System.out.println("----------------------------------------------------------------");
@@ -440,14 +439,14 @@ public class Home {
 					System.out.println(clin.getNome());
 					System.out.println(clin.getCpf());    
 					System.out.println(clin.getTelefone());
-					System.out.println("\nEndere�o:\n");
+					System.out.println("\nEndereço:\n");
 					System.out.println(endereco.getEstado()+" "+endereco.getCidade());
 					System.out.println(endereco.getBairro()+" "+endereco.getRua());
 					System.out.println(endereco.getNumero());
 					System.out.println(endereco.getCep());
 					System.out.println(endereco.getPontRefe());
 					System.out.println("\n----------------------------------------------------------------");
-					System.out.println("|                          SERVI�O                             |");
+					System.out.println("|                          SERVIÇO                             |");
 					System.out.println("----------------------------------------------------------------\n");
 					System.out.println("A ser Fabricado:"+ pedido.gettipopedido());
 					System.out.println("Altura: "+orc.getAltura()+" m");
@@ -456,12 +455,12 @@ public class Home {
 					System.out.println("\n----------------------------------------------------------------");
 					System.out.println("|                         REMETENTE                            |");
 					System.out.println("----------------------------------------------------------------");
-					System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEI��O");
-					System.out.println("Av. Uninassau Gra�as");
-					System.out.println("N� 114          CEP: 52011-210");
-					System.out.println("Gra�as, Recife - PE");
+					System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEIÇÃO");
+					System.out.println("Av. Uninassau Graças");
+					System.out.println("Nº 114          CEP: 52011-210");
+					System.out.println("Graças, Recife - PE");
 					System.out.println("X--------------------------------------------------------------X");
-					System.out.println("Servi�o Solicitado com sucesso...");
+					System.out.println("Serviço Solicitado com sucesso...");
 				}if(fpg.getTipopagamento() == 3) {	
 					System.out.println("----------------------------------------------------------------");
 					System.out.println("|                     DESTINATARIO                             |");
@@ -477,21 +476,21 @@ public class Home {
 					System.out.println(endereco.getCep());
 					System.out.println(endereco.getPontRefe());
 					System.out.println("\n----------------------------------------------------------------");
-					System.out.println("|                          SERVI�O                             |");
+					System.out.println("|                          SERVIÇO                             |");
 					System.out.println("----------------------------------------------------------------\n");
 					System.out.println("A ser Fabricado:"+ pedido.gettipopedido());
 					System.out.println("Altura: "+orc.getAltura()+" m");
 					System.out.println("Largura: "+orc.getLargura()+" m");
-					System.out.println(orc.getMetrosqd() +" m�");		
+					System.out.println(orc.getMetrosqd() +" m2");		
 					System.out.println("\n----------------------------------------------------------------");
 					System.out.println("|                         REMETENTE                            |");
 					System.out.println("----------------------------------------------------------------");
-					System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEI��O");
-					System.out.println("Av. Uninassau Gra�as");
-					System.out.println("N� 114          CEP: 52011-210");
-					System.out.println("Gra�as, Recife - PE");
+					System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEIÇÃO");
+					System.out.println("Av. Uninassau Graças");
+					System.out.println("Nº 114          CEP: 52011-210");
+					System.out.println("Graças, Recife - PE");
 					System.out.println("X--------------------------------------------------------------X");
-					System.out.println("Servi�o Solicitado com sucesso...");
+					System.out.println("Serviço Solicitado com sucesso...");
 
 				}if(fpg.getTipopagamento() == 2) {
 					System.out.println("----------------------------------------------------------------");
@@ -501,14 +500,14 @@ public class Home {
 					System.out.println(clin.getNome());
 					System.out.println(clin.getCpf());    
 					System.out.println(clin.getTelefone());
-					System.out.println("\nEndere�o:\n");
+					System.out.println("\nEndereço:\n");
 					System.out.println(endereco.getEstado()+" "+endereco.getCidade());
 					System.out.println(endereco.getBairro()+" "+endereco.getRua());
 					System.out.println(endereco.getNumero());
 					System.out.println(endereco.getCep());
 					System.out.println(endereco.getPontRefe());
 					System.out.println("\n----------------------------------------------------------------");
-					System.out.println("|                          SERVI�O                             |");
+					System.out.println("|                           SERVIÇO                              |");
 					System.out.println("----------------------------------------------------------------\n");
 					System.out.println("A ser Fabricado:"+ pedido.gettipopedido());
 					System.out.println("Altura: "+orc.getAltura()+" m");
@@ -517,12 +516,12 @@ public class Home {
 					System.out.println("\n----------------------------------------------------------------");
 					System.out.println("|                         REMETENTE                            |");
 					System.out.println("----------------------------------------------------------------");
-					System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEI��O");
-					System.out.println("Av. Uninassau Gra�as");
-					System.out.println("N� 114          CEP: 52011-210");
-					System.out.println("Gra�as, Recife - PE");
+					System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEIÇÃO");
+					System.out.println("Av. Uninassau Graças");
+					System.out.println("Nº 114          CEP: 52011-210");
+					System.out.println("Graças, Recife - PE");
 					System.out.println("X--------------------------------------------------------------X");
-					System.out.println("Servi�o Solicitado com sucesso...");
+					System.out.println("Serviço Solicitado com sucesso...");
 				}if(fpg.getTipopagamento()<=0 || fpg.getTipopagamento()>3 ) {
 					System.out.println("TIPO DE PAGAMENTO INVALIDO!!");
 
@@ -601,13 +600,13 @@ public class Home {
 				System.out.println("\nA SER FABRICADO:\n");
 				System.out.println(orc.getAltura()+" m");
 				System.out.println(orc.getLargura()+" m");
-				System.out.println(orc.getMetrosqd() +" m�");	
+				System.out.println(orc.getMetrosqd() +" m2");	
 
 				System.out.println("\nTIPO DE MATERIAL (1 ANODIZADO | 2 BRANCO ANODIZADO)");
 				System.out.println(orc.getTipmaterial());
 				System.out.println("Nome do Cliente: "+ clin.getNome());
 				System.out.println("\n"+tecnic.toString());
-				System.out.println("\nPOR N�O HAVER BANCO N�O EXISTE DADOS EXISTENTE ANTES DE INSERIR DADOS");
+				System.out.println("\nPOR NÃO HAVER BANCO N�O EXISTE DADOS EXISTENTE ANTES DE INSERIR DADOS");
 			}
 
 		}
@@ -629,7 +628,7 @@ public class Home {
 
 		if (ma.find()) {
 			System.out.println("*******************************************");
-			System.out.println("voce n�o pode inserir n�meros neste campo!");
+			System.out.println("voce não pode inserir números neste campo!");
 			System.out.println("*******************************************");
 
 			validarcodigo = true;
@@ -645,12 +644,11 @@ public class Home {
 
 		if(!ma.find()) {
 			System.out.println("******************************************");
-			System.out.println("voce n�o pode inserir letras neste campo!");
+			System.out.println("voce não pode inserir letras neste campo!");
 			System.out.println("********************************************");
 
 			validarCodigo = true;
 		}
-
 		return validarCodigo;
 	}
 }
