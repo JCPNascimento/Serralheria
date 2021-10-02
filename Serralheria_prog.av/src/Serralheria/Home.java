@@ -1,9 +1,10 @@
 package Serralheria;
 
-
+import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import java.util.List;
 public class Home {
 
 	public static void main(String[] args) {
@@ -14,6 +15,10 @@ public class Home {
 		FormaPagamento fpg = new FormaPagamento();
 		Tecnico tc = new Tecnico();
 		Dados ar = new Dados();
+
+
+		int n = 0;
+
 		// Enter para continuar
 		System.out.println("****************************************************************");
 		System.out.println("|                          Bem Vindo!                          |");
@@ -27,103 +32,351 @@ public class Home {
 		}
 		// Fim enter para continuar
 		//inicio menu
-		System.out.println("Selecione a opï¿½ï¿½o de acesso:\n  1- CLIENTE | 2-Tï¿½CNICO\nOPï¿½ï¿½O:");
-		int menu = menu = new Scanner(System.in).nextInt();
+		int menu = 0;
+		Scanner m = new Scanner(System.in);
+
+		do {
+			do {
+
+				try {
+					System.out.println("Selecione a opï¿½ï¿½o de acesso:\n  1- CLIENTE | 2-Tï¿½CNICO\nOPï¿½ï¿½O:");
+					menu = m.nextInt();	
+				} catch (InputMismatchException e) {
+					System.out.println("*******************************************");
+					System.out.println("Ops, Digite um cï¿½digo valido.");
+					System.out.println("*******************************************");
+				}
+				m.nextLine();
+
+			} while( menu == 0);
+
+			if(menu != 1 && menu != 2) {
+				System.out.println("*******************************************");
+				System.out.println("Ops... Digite 1 para Cliente ou 2 Para Tecnico");
+				System.out.println("*******************************************");
+			}
+
+		} while(menu != 1 && menu != 2);
+
 
 		switch (menu) {
 
 		case 1: 
-			Scanner end = new Scanner (System.in);
+
+			//			Scanner end = new Scanner (System.in);
 			System.out.println("              CADASTRO            "
 					+ "\nCadastre-se para Realizar um Pedido");
+
 			//DADOS PESSOAIS CLIENTE
 			Scanner dadosc = new Scanner(System.in);
-			
-			System.out.println("NOME E SOBRENOME: ");
-			clin.setNome(dadosc.nextLine());
-			ar.insert(clin.getNome());
-			
-			System.out.println("TELEFONE PARA CONTATO: ");
-			clin.setTelefone(dadosc.nextLine());
-			ar.insert(clin.getTelefone());
 
-			System.out.println("CPF: ");
+			boolean validarnome = false;
+			String nome;
+
+			do {
+
+				validarnome = false;
+
+				System.out.println("NOME E SOBRENOME: ");
+				//	nome = dadosc.nextLine();
+
+				clin.setNome(dadosc.nextLine());
+				ar.find().add(clin.getNome());
+
+				Pattern p = Pattern.compile("([0-9])");
+				Matcher ma = p.matcher(clin.getNome());
+
+				if (ma.find()) {
+					System.out.println("*******************************************");
+					System.out.println("voce nï¿½o pode inserir nï¿½meros neste campo!");
+					System.out.println("*******************************************");
+
+					validarnome = true;
+				}
+			}while (validarnome);
+
+			boolean val;
+			boolean valnum;
+			int count = 0;
+			String aux;
+
+			do {
+				do {
+					count = 0;
+					System.out.println("Telefone: ");
+					aux = dadosc.nextLine();
+
+					if(aux.length() != 11) {        			
+						System.out.println("*******************************************");
+						System.out.println("Minimo 11 digitos");
+						System.out.println("*******************************************");
+						count++;
+					}
+				}while(count == 1);
+				valnum = validarCodigoNumber(aux);
+
+				clin.setTelefone(aux);
+				clin.setTelefone(dadosc.nextLine());
+				ar.find().add(clin.getTelefone());
+
+			}while(valnum);
+
+
+			do {
+				do {
+					count = 0;
+					System.out.println("CPF: ");
+					aux = dadosc.nextLine();clin.setCpf(dadosc.nextLine());
+					if(aux.length() != 11) {
+						System.out.println("*******************************************");
+						System.out.println("Minimo 11 digitos");
+						System.out.println("*******************************************");
+						count++;
+					}
+				}while(count == 1);
+				valnum = validarCodigoNumber(aux);
+				clin.setTelefone(aux);
+
+				//   clin.setCpf(dadosc.nextLine());
+				ar.find().add(clin.getCpf());
+			}while(valnum);
+
+
+			System.out.println("Itens da lista:");
+			System.out.println(ar.find());
+
+			System.out.println("CPF a ser removido: ");
 			clin.setCpf(dadosc.nextLine());
-			ar.insert(clin.getCpf());
+			ar.remover(clin.getCpf());
 
-			System.out.println("____________ ENDEREï¿½O ____________");
+			System.out.println("Itens da lista:");
+			System.out.println(ar.find());
 
-			System.out.println("Estado: ");
-			endereco.setEstado(dadosc.nextLine());
-			ar.insert(endereco.getEstado());
 
-			System.out.println("Cidade: ");
-			endereco.setCidade(dadosc.nextLine());
-			ar.insert(endereco.getCidade());
+			System.out.println("Insira o item a ser procurado na lista:");
+			String searchString = dadosc.nextLine();
 
-			System.out.println("Bairro: ");
-			endereco.setBairro(dadosc.nextLine());
-			ar.insert(endereco.getBairro());
-
-			System.out.println("Rua: ");
-			endereco.setRua(dadosc.nextLine());
-			ar.insert(endereco.getRua());
-
-			System.out.println("Ponto de Referencia: ");
-			endereco.setPontRefe(dadosc.nextLine());
-			ar.insert(endereco.getPontRefe());
-
-			System.out.println("Numero da Residencia: ");
-			endereco.setNumero(dadosc.nextLine());
-			ar.insert(endereco.getNumero());
-
-			System.out.println("CEP: ");
-			endereco.setCep(dadosc.nextLine());
-			ar.insert(endereco.getCep());
-			
-			
-			
-			//pedido
-			System.out.println("--------------------");
-			System.out.println("       RETORNO      ");
-			ar.find();
-			
-			System.out.println("--------------------");
-			
-			
-			System.out.println("****************************************************************");
-			System.out.println("|                          SERVIï¿½O                             |");
-			System.out.println("****************************************************************");
-			Pedido pedido = new Pedido(menu);
-			
-			
-			System.out.println("Quantos Serviços serão feitos ?");
-			Scanner s = new Scanner(System.in);
-			int n = s.nextInt();
-			
-			for(int i = 0; i < n; i++) {
-			
-
-			System.out.println("TIPO DE SERVIï¿½O A SER EXECUTADO ");
-			System.out.println("1- JANELA| 2- PORTA  | 3 - PORTï¿½O | 4 - TOLDO");
-			pedido.settipopedido(dadosc.nextInt());
-
-			Scanner orcamento = new Scanner(System.in);
-
-			System.out.println("Informe a Altura: ");
-			orc.setAltura(orcamento.nextDouble());
-
-			System.out.println("Informe a Largura: ");
-			orc.setLargura(orcamento.nextDouble());
-
-			System.out.println(orc.getMetrosqd()+" m2");
-
-			System.out.println(" 1-Cor padr o 2-Cor Branca \nTipo de Material: ");
-			orc.setTipmaterial(orcamento.nextInt());
-
-			System.out.println(orc.getTotal());
-			fpg.setValortot(orc.getTotal());
+			for (String curVal : ar.dados){
+				if (curVal.contains(searchString)){
+					ar.listClone.add(curVal);
+				}
 			}
+
+			System.out.println(ar.listClone);
+
+
+			System.out.println("____________ ENDERECO ____________");
+
+			do {
+				System.out.println("Estado: ");
+				String end = dadosc.nextLine();
+				val = validarcodigo(end);
+				endereco.setEstado(end);
+			}while(val);
+			//			endereco.setEstado(dadosc.nextLine());
+			ar.find().add(endereco.getEstado());
+
+			do {
+				System.out.println("Cidade: ");
+				String cid = dadosc.nextLine();
+				val = validarcodigo(cid);
+				endereco.setCidade(cid);
+			}while(val);
+			//			System.out.println("Cidade: ");
+			//			endereco.setCidade(dadosc.nextLine());
+			ar.find().add(endereco.getCidade());
+
+			do {
+				System.out.println("Bairro: ");
+				String bar = dadosc.nextLine();
+				val = validarcodigo(bar);
+				endereco.setBairro(bar);
+			}while(val);
+			//			endereco.setBairro(dadosc.nextLine());
+			ar.find().add(endereco.getBairro());
+
+			do {
+				System.out.println("RUA: ");
+				String rua = dadosc.nextLine();
+				val = validarcodigo(rua);
+				endereco.setRua(rua);
+			}while(val);
+			//			endereco.setRua(dadosc.nextLine());
+			ar.find().add(endereco.getRua());
+
+			do {
+				System.out.println("PONTO DE REFERENCIA: ");
+				String ref = dadosc.nextLine();
+				val = validarcodigo(ref);
+				endereco.setPontRefe(ref);
+			}while(val);
+			//			endereco.setPontRefe(dadosc.nextLine());
+			ar.find().add(endereco.getPontRefe());
+
+			do {
+				System.out.println("NUMERO: ");
+				String num = dadosc.nextLine();
+				valnum = validarCodigoNumber(num);
+				endereco.setNumero(num);
+			}while(valnum);
+			//			endereco.setNumero(dadosc.nextLine());
+			ar.find().add(endereco.getNumero());
+
+			do {
+				do {
+					count = 0;
+					System.out.println("CEP: ");
+					aux = dadosc.nextLine();
+					if(aux.length() != 8) {
+						System.out.println("*******************************************");
+						System.out.println("Minimo 8 digitos");
+						System.out.println("*******************************************");
+						count++;
+					}
+				}while(count == 1);			
+				valnum = validarCodigoNumber(aux);
+				endereco.setCep(aux);
+				ar.find().add(endereco.getCep());
+
+			}while(valnum);
+			//			endereco.setCep(dadosc.nextLine());
+
+
+			//pedido
+			System.out.println("****************************************************************");
+			System.out.println("|                          SERVICO                             |");
+			System.out.println("****************************************************************");
+
+			Pedido pedido = new Pedido(menu);
+
+			int j = 0;
+
+			do {
+
+				try {
+
+					System.out.println("Quantos Serviï¿½os serï¿½o feitos ?");
+					Scanner s = new Scanner(System.in);
+					n = s.nextInt();
+					j++;
+				}catch(InputMismatchException e){
+
+					System.out.println("****************************************************************");
+					System.out.println("Ops, Digite um nï¿½mero valido.");
+					System.out.println("****************************************************************");
+
+				}
+
+			}while(j==0);
+
+			j=0;
+
+			for(int i = 0; i < n; i++) {
+
+
+				do {
+					try {
+
+						System.out.println("TIPO DE SERVIï¿½O A SER EXECUTADO ");
+						System.out.println("1- JANELA| 2- PORTA  | 3 - PORTï¿½O | 4 - TOLDO");
+						pedido.settipopedido(dadosc.nextInt());
+						j++;
+					}catch(InputMismatchException e){
+
+						System.out.println("****************************************************************");
+						System.out.println("Ops, Digite um nï¿½mero valido.");
+						System.out.println("****************************************************************");
+
+					}
+					dadosc.nextLine();
+				}while(j==0 );
+
+				j=0;
+
+				Scanner orcamento = new Scanner(System.in);
+
+				do {	
+					do {
+
+						try {
+							System.out.println("Informe a Altura: ");
+							orc.setAltura(orcamento.nextDouble());
+							j++;
+
+						}catch(InputMismatchException e){
+
+							System.out.println("****************************************************************");
+							System.out.println("Ops, Digite uma altura valida.");
+							System.out.println("****************************************************************");
+						}
+						orcamento.nextLine();
+					}while(j==0);
+					j=0;
+					if(orc.getAltura() == 0) {
+
+						System.out.println("****************************************************************");
+						System.out.println("Ops, Digite uma altura Maior que 0.");
+						System.out.println("****************************************************************");
+
+					}
+				}while(orc.getAltura()==0);
+				j=0;
+
+				do {
+					do {
+
+						try {
+							System.out.println("Informe a Largura: ");
+							orc.setLargura(orcamento.nextDouble());
+							j++;
+
+						}catch(InputMismatchException e){
+							System.out.println("****************************************************************");
+							System.out.println("Ops, Digite uma largura valida.");
+							System.out.println("****************************************************************");                    
+						}
+						orcamento.nextLine();
+					}while(j==0);
+					j=0;
+					if(orc.getLargura()==0){
+						System.out.println("****************************************************************");
+						System.out.println("Ops, Digite uma largura Maior que 0.");
+						System.out.println("****************************************************************");
+
+					}
+				}while(orc.getLargura()==0);
+				j=0;
+
+				System.out.println(orc.getMetrosqd()+" m2");
+				do {
+					do {
+						try {
+							System.out.println(" 1-Cor padr o 2-Cor Branca \nTipo de Material: ");
+							orc.setTipmaterial(orcamento.nextInt());
+							j++;
+						}catch(InputMismatchException e){
+
+							System.out.println("****************************************************************");
+							System.out.println("Ops, Digite uma cor valida.");
+							System.out.println("****************************************************************");
+
+						}
+						orcamento.nextLine();
+					}while(j==0);
+					if(orc.getTipmaterial()!=1 && orc.getTipmaterial()!=2) {
+						j=0;
+
+						System.out.println("****************************************************************");
+						System.out.println("Ops, Digite uma cor valida.");
+						System.out.println("****************************************************************");
+					}
+				}while(orc.getTipmaterial()!=1 && orc.getTipmaterial()!=2);
+				j=0;
+
+				System.out.println(orc.getTotal());
+				fpg.setValortot(orc.getTotal());
+			}
+
 			Scanner paga = new Scanner(System.in);
 			System.out.println("****************************************************************");
 			System.out.println("|                       TIPO PAGAMENTO                         |");
@@ -131,158 +384,184 @@ public class Home {
 			System.out.println("FORMA DE PAGAMENTO:\n ");
 			System.out.println("| 1 -CREDITO | 2 -DEBITO | 3 -ESPECIE |");
 			while(fpg.getTipopagamento()>3 || fpg.getTipopagamento()<=0) {
-			fpg.setTipopagamento(paga.nextInt(), orc.getTotal());
+				fpg.setTipopagamento(paga.nextInt(), orc.getTotal());
 
-			System.out.println(""+fpg.getTipopagamento()); 
+				System.out.println(""+fpg.getTipopagamento()); 
 
-			if(fpg.getTipopagamento() == 1) {
-				System.out.println("INFORME A QUANTIDADE DE PARCELAS: ");
-				fpg.setVezes(paga.nextInt());
+				if(fpg.getTipopagamento() == 1) {
 
-				fpg.setCredito(fpg.getVezes(), orc.getTotal());
-				System.out.println();	
-			
-				//Complemento cupom fiscal    
-				System.out.println("----------------------------------------------------------------");
-				System.out.println("|                     DESTINATARIO                             |");
-				System.out.println("----------------------------------------------------------------"); 
-				System.out.println("\nDados do cliente:\n");
-				System.out.println(clin.getNome());
-				System.out.println(clin.getCpf());    
-				System.out.println(clin.getTelefone());
-				System.out.println("\nEndereï¿½o:\n");
-				System.out.println(endereco.getEstado()+" "+endereco.getCidade());
-				System.out.println(endereco.getBairro()+" "+endereco.getRua());
-				System.out.println(endereco.getNumero());
-				System.out.println(endereco.getCep());
-				System.out.println(endereco.getPontRefe());
-				System.out.println("\n----------------------------------------------------------------");
-				System.out.println("|                          SERVIï¿½O                             |");
-				System.out.println("----------------------------------------------------------------\n");
-				System.out.println("A ser Fabricado:"+ pedido.gettipopedido());
-				System.out.println("Altura: "+orc.getAltura()+" m");
-				System.out.println("Largura: "+orc.getLargura()+" m");
-				System.out.println(orc.getMetrosqd() +" mï¿½");		
-				System.out.println("\n----------------------------------------------------------------");
-				System.out.println("|                         REMETENTE                            |");
-				System.out.println("----------------------------------------------------------------");
-				System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEIï¿½ï¿½O");
-				System.out.println("Av. Uninassau Graï¿½as");
-				System.out.println("Nï¿½ 114          CEP: 52011-210");
-				System.out.println("Graï¿½as, Recife - PE");
-				System.out.println("X--------------------------------------------------------------X");
-				System.out.println("Serviï¿½o Solicitado com sucesso...");
-				
-			}if(fpg.getTipopagamento() == 2) {
-				System.out.println("----------------------------------------------------------------");
-				System.out.println("|                     DESTINATARIO                             |");
-				System.out.println("----------------------------------------------------------------"); 
-				System.out.println("\nDados do cliente:\n");
-				System.out.println(clin.getNome());
-				System.out.println(clin.getCpf());    
-				System.out.println(clin.getTelefone());
-				System.out.println("\nEndereï¿½o:\n");
-				System.out.println(endereco.getEstado()+" "+endereco.getCidade());
-				System.out.println(endereco.getBairro()+" "+endereco.getRua());
-				System.out.println(endereco.getNumero());
-				System.out.println(endereco.getCep());
-				System.out.println(endereco.getPontRefe());
-				System.out.println("\n----------------------------------------------------------------");
-				System.out.println("|                          SERVIï¿½O                             |");
-				System.out.println("----------------------------------------------------------------\n");
-				System.out.println("A ser Fabricado:"+ pedido.gettipopedido());
-				System.out.println("Altura: "+orc.getAltura()+" m");
-				System.out.println("Largura: "+orc.getLargura()+" m");
-				System.out.println(orc.getMetrosqd() +" mï¿½");		
-				System.out.println("\n----------------------------------------------------------------");
-				System.out.println("|                         REMETENTE                            |");
-				System.out.println("----------------------------------------------------------------");
-				System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEIï¿½ï¿½O");
-				System.out.println("Av. Uninassau Graï¿½as");
-				System.out.println("Nï¿½ 114          CEP: 52011-210");
-				System.out.println("Graï¿½as, Recife - PE");
-				System.out.println("X--------------------------------------------------------------X");
-				System.out.println("Serviï¿½o Solicitado com sucesso...");
-			}if(fpg.getTipopagamento() == 3) {	
-				System.out.println("----------------------------------------------------------------");
-				System.out.println("|                     DESTINATARIO                             |");
-				System.out.println("----------------------------------------------------------------"); 
-				System.out.println("\nDados do cliente:\n");
-				System.out.println(clin.getNome());
-				System.out.println(clin.getCpf());    
-				System.out.println(clin.getTelefone());
-				System.out.println("\nEndereï¿½o:\n");
-				System.out.println(endereco.getEstado()+" "+endereco.getCidade());
-				System.out.println(endereco.getBairro()+" "+endereco.getRua());
-				System.out.println(endereco.getNumero());
-				System.out.println(endereco.getCep());
-				System.out.println(endereco.getPontRefe());
-				System.out.println("\n----------------------------------------------------------------");
-				System.out.println("|                          SERVIï¿½O                             |");
-				System.out.println("----------------------------------------------------------------\n");
-				System.out.println("A ser Fabricado:"+ pedido.gettipopedido());
-				System.out.println("Altura: "+orc.getAltura()+" m");
-				System.out.println("Largura: "+orc.getLargura()+" m");
-				System.out.println(orc.getMetrosqd() +" mï¿½");		
-				System.out.println("\n----------------------------------------------------------------");
-				System.out.println("|                         REMETENTE                            |");
-				System.out.println("----------------------------------------------------------------");
-				System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEIï¿½ï¿½O");
-				System.out.println("Av. Uninassau Graï¿½as");
-				System.out.println("Nï¿½ 114          CEP: 52011-210");
-				System.out.println("Graï¿½as, Recife - PE");
-				System.out.println("X--------------------------------------------------------------X");
-				System.out.println("Serviï¿½o Solicitado com sucesso...");
-		
-			}if(fpg.getTipopagamento() == 2) {
-				System.out.println("----------------------------------------------------------------");
-				System.out.println("|                     DESTINATARIO                             |");
-				System.out.println("----------------------------------------------------------------"); 
-				System.out.println("\nDados do cliente:\n");
-				System.out.println(clin.getNome());
-				System.out.println(clin.getCpf());    
-				System.out.println(clin.getTelefone());
-				System.out.println("\nEndereï¿½o:\n");
-				System.out.println(endereco.getEstado()+" "+endereco.getCidade());
-				System.out.println(endereco.getBairro()+" "+endereco.getRua());
-				System.out.println(endereco.getNumero());
-				System.out.println(endereco.getCep());
-				System.out.println(endereco.getPontRefe());
-				System.out.println("\n----------------------------------------------------------------");
-				System.out.println("|                          SERVIï¿½O                             |");
-				System.out.println("----------------------------------------------------------------\n");
-				System.out.println("A ser Fabricado:"+ pedido.gettipopedido());
-				System.out.println("Altura: "+orc.getAltura()+" m");
-				System.out.println("Largura: "+orc.getLargura()+" m");
-				System.out.println(orc.getMetrosqd() +" mï¿½");		
-				System.out.println("\n----------------------------------------------------------------");
-				System.out.println("|                         REMETENTE                            |");
-				System.out.println("----------------------------------------------------------------");
-				System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEIï¿½ï¿½O");
-				System.out.println("Av. Uninassau Graï¿½as");
-				System.out.println("Nï¿½ 114          CEP: 52011-210");
-				System.out.println("Graï¿½as, Recife - PE");
-				System.out.println("X--------------------------------------------------------------X");
-				System.out.println("Serviï¿½o Solicitado com sucesso...");
-			}if(fpg.getTipopagamento()<=0 || fpg.getTipopagamento()>3 ) {
-				System.out.println("TIPO DE PAGAMENTO INVALIDO!!");
-				
-				System.out.println("ESCOLHA NOVAMENTO O TIPO DE PAGAMENTO\n");
-				
-				System.out.println("****************************************************************");
-				System.out.println("|                       TIPO PAGAMENTO                         |");
-				System.out.println("****************************************************************");
-				System.out.println("FORMA DE PAGAMENTO:\n ");
-				System.out.println("| 1 -CREDITO | 2 -DEBITO | 3 -ESPECIE |");
+					do {
+						try {
+							System.out.println("INFORME A QUANTIDADE DE PARCELAS: ");
+							fpg.setVezes(paga.nextInt());
+							fpg.setCredito(fpg.getVezes(), orc.getTotal());
+							j++;
+						} catch (InputMismatchException e) {
+							System.out.println("****************************************************************");
+							System.out.println("voce nao pode digitar letras.");
+							System.out.println("****************************************************************");
+
+						}
+						paga.nextLine();
+					}while(j==0);
+					j=0;
+
+					//Complemento cupom fiscal    
+					System.out.println("----------------------------------------------------------------");
+					System.out.println("|                     DESTINATARIO                             |");
+					System.out.println("----------------------------------------------------------------"); 
+					System.out.println("\nDados do cliente:\n");
+					System.out.println(clin.getNome());
+					System.out.println(clin.getCpf());    
+					System.out.println(clin.getTelefone());
+					System.out.println("\nEndereï¿½o:\n");
+					System.out.println(endereco.getEstado()+" "+endereco.getCidade());
+					System.out.println(endereco.getBairro()+" "+endereco.getRua());
+					System.out.println(endereco.getNumero());
+					System.out.println(endereco.getCep());
+					System.out.println(endereco.getPontRefe());
+					System.out.println("\n----------------------------------------------------------------");
+					System.out.println("|                          SERVIï¿½O                             |");
+					System.out.println("----------------------------------------------------------------\n");
+					System.out.println("A ser Fabricado:"+ pedido.gettipopedido());
+					System.out.println("Altura: "+orc.getAltura()+" m");
+					System.out.println("Largura: "+orc.getLargura()+" m");
+					System.out.println(orc.getMetrosqd() +" mï¿½");		
+					System.out.println("\n----------------------------------------------------------------");
+					System.out.println("|                         REMETENTE                            |");
+					System.out.println("----------------------------------------------------------------");
+					System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEIï¿½ï¿½O");
+					System.out.println("Av. Uninassau Graï¿½as");
+					System.out.println("Nï¿½ 114          CEP: 52011-210");
+					System.out.println("Graï¿½as, Recife - PE");
+					System.out.println("X--------------------------------------------------------------X");
+					System.out.println("Serviï¿½o Solicitado com sucesso...");
+
+				}if(fpg.getTipopagamento() == 2) {
+					System.out.println("----------------------------------------------------------------");
+					System.out.println("|                     DESTINATARIO                             |");
+					System.out.println("----------------------------------------------------------------"); 
+					System.out.println("\nDados do cliente:\n");
+					System.out.println(clin.getNome());
+					System.out.println(clin.getCpf());    
+					System.out.println(clin.getTelefone());
+					System.out.println("\nEndereï¿½o:\n");
+					System.out.println(endereco.getEstado()+" "+endereco.getCidade());
+					System.out.println(endereco.getBairro()+" "+endereco.getRua());
+					System.out.println(endereco.getNumero());
+					System.out.println(endereco.getCep());
+					System.out.println(endereco.getPontRefe());
+					System.out.println("\n----------------------------------------------------------------");
+					System.out.println("|                          SERVIï¿½O                             |");
+					System.out.println("----------------------------------------------------------------\n");
+					System.out.println("A ser Fabricado:"+ pedido.gettipopedido());
+					System.out.println("Altura: "+orc.getAltura()+" m");
+					System.out.println("Largura: "+orc.getLargura()+" m");
+					System.out.println(orc.getMetrosqd() +" mï¿½");		
+					System.out.println("\n----------------------------------------------------------------");
+					System.out.println("|                         REMETENTE                            |");
+					System.out.println("----------------------------------------------------------------");
+					System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEIï¿½ï¿½O");
+					System.out.println("Av. Uninassau Graï¿½as");
+					System.out.println("Nï¿½ 114          CEP: 52011-210");
+					System.out.println("Graï¿½as, Recife - PE");
+					System.out.println("X--------------------------------------------------------------X");
+					System.out.println("Serviï¿½o Solicitado com sucesso...");
+				}if(fpg.getTipopagamento() == 3) {	
+					System.out.println("----------------------------------------------------------------");
+					System.out.println("|                     DESTINATARIO                             |");
+					System.out.println("----------------------------------------------------------------"); 
+					System.out.println("\nDados do cliente:\n");
+					System.out.println(clin.getNome());
+					System.out.println(clin.getCpf());    
+					System.out.println(clin.getTelefone());
+					System.out.println("\nEndereï¿½o:\n");
+					System.out.println(endereco.getEstado()+" "+endereco.getCidade());
+					System.out.println(endereco.getBairro()+" "+endereco.getRua());
+					System.out.println(endereco.getNumero());
+					System.out.println(endereco.getCep());
+					System.out.println(endereco.getPontRefe());
+					System.out.println("\n----------------------------------------------------------------");
+					System.out.println("|                          SERVIï¿½O                             |");
+					System.out.println("----------------------------------------------------------------\n");
+					System.out.println("A ser Fabricado:"+ pedido.gettipopedido());
+					System.out.println("Altura: "+orc.getAltura()+" m");
+					System.out.println("Largura: "+orc.getLargura()+" m");
+					System.out.println(orc.getMetrosqd() +" mï¿½");		
+					System.out.println("\n----------------------------------------------------------------");
+					System.out.println("|                         REMETENTE                            |");
+					System.out.println("----------------------------------------------------------------");
+					System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEIï¿½ï¿½O");
+					System.out.println("Av. Uninassau Graï¿½as");
+					System.out.println("Nï¿½ 114          CEP: 52011-210");
+					System.out.println("Graï¿½as, Recife - PE");
+					System.out.println("X--------------------------------------------------------------X");
+					System.out.println("Serviï¿½o Solicitado com sucesso...");
+
+				}if(fpg.getTipopagamento() == 2) {
+					System.out.println("----------------------------------------------------------------");
+					System.out.println("|                     DESTINATARIO                             |");
+					System.out.println("----------------------------------------------------------------"); 
+					System.out.println("\nDados do cliente:\n");
+					System.out.println(clin.getNome());
+					System.out.println(clin.getCpf());    
+					System.out.println(clin.getTelefone());
+					System.out.println("\nEndereï¿½o:\n");
+					System.out.println(endereco.getEstado()+" "+endereco.getCidade());
+					System.out.println(endereco.getBairro()+" "+endereco.getRua());
+					System.out.println(endereco.getNumero());
+					System.out.println(endereco.getCep());
+					System.out.println(endereco.getPontRefe());
+					System.out.println("\n----------------------------------------------------------------");
+					System.out.println("|                          SERVIï¿½O                             |");
+					System.out.println("----------------------------------------------------------------\n");
+					System.out.println("A ser Fabricado:"+ pedido.gettipopedido());
+					System.out.println("Altura: "+orc.getAltura()+" m");
+					System.out.println("Largura: "+orc.getLargura()+" m");
+					System.out.println(orc.getMetrosqd() +" mï¿½");		
+					System.out.println("\n----------------------------------------------------------------");
+					System.out.println("|                         REMETENTE                            |");
+					System.out.println("----------------------------------------------------------------");
+					System.out.println("SERRALHARIA NOSSA SENHORA DA CONCEIï¿½ï¿½O");
+					System.out.println("Av. Uninassau Graï¿½as");
+					System.out.println("Nï¿½ 114          CEP: 52011-210");
+					System.out.println("Graï¿½as, Recife - PE");
+					System.out.println("X--------------------------------------------------------------X");
+					System.out.println("Serviï¿½o Solicitado com sucesso...");
+				}if(fpg.getTipopagamento()<=0 || fpg.getTipopagamento()>3 ) {
+					System.out.println("TIPO DE PAGAMENTO INVALIDO!!");
+
+					System.out.println("ESCOLHA NOVAMENTO O TIPO DE PAGAMENTO\n");
+
+					System.out.println("****************************************************************");
+					System.out.println("|                       TIPO PAGAMENTO                         |");
+					System.out.println("****************************************************************");
+					System.out.println("FORMA DE PAGAMENTO:\n ");
+					System.out.println("| 1 -CREDITO | 2 -DEBITO | 3 -ESPECIE |");
+				}
 			}
-			
-			}
-			System.out.println("1- ENCERRAR | 2 -ACESSO FUNCIONARIO");
-			menu = new Scanner(System.in).nextInt();
+
+			do {
+				try {
+
+					System.out.println("1- ENCERRAR | 2 -ACESSO FUNCIONARIO");
+					menu = new Scanner(System.in).nextInt();
+					j++;
+
+				} catch(InputMismatchException e) {
+					System.out.println("****************************************************************");
+					System.out.println("voce nao pode digitar letras nesse campo!");
+					System.out.println("****************************************************************");
+
+				}
+
+			}while(j==0);
+
+			j = 0;
+
 			switch (menu) {
 			case 1: 
 				System.out.println("\nObrigado pela preferencia!"); 
-				
 				break;
 			case 2:
 				Scanner acess = new Scanner(System.in);
@@ -335,6 +614,52 @@ public class Home {
 				System.out.println("\n"+tecnic.toString());
 				System.out.println("\nPOR Nï¿½O HAVER BANCO Nï¿½O EXISTE DADOS EXISTENTE ANTES DE INSERIR DADOS");
 			}
+
 		}
+	}
+
+
+
+	public static boolean validarcodigo(String codigo){
+
+		boolean validarcodigo;
+
+
+		validarcodigo = false;
+
+
+
+		Pattern p = Pattern.compile("([0-9])");
+		Matcher ma = p.matcher(codigo);
+
+		if (ma.find()) {
+			System.out.println("*******************************************");
+			System.out.println("voce nï¿½o pode inserir nï¿½meros neste campo!");
+			System.out.println("*******************************************");
+
+			validarcodigo = true;
+
+		}
+
+		return validarcodigo;
+
+	}
+
+	public static boolean validarCodigoNumber(String codigo) {
+		boolean validarCodigo = false;
+
+		Pattern p = Pattern.compile("[0-9]");
+		Matcher ma = p.matcher(codigo);
+
+		if(!ma.find()) {
+			System.out.println("******************************************");
+			System.out.println("voce nï¿½o pode inserir letras neste campo!");
+			System.out.println("********************************************");
+
+			validarCodigo = true;
+		}
+
+		return validarCodigo;
+
 	}
 }

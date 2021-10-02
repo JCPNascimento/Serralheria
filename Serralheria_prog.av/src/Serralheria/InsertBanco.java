@@ -13,11 +13,11 @@ public class InsertBanco {
 	
 	public InsertBanco() {
 
-		try {
-			this.connection = new ConnectionFactory().getConnection();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
+	//	try {
+	//		this.connection = new ConnectionFactory().getConnection();
+	//	} catch (SQLException e) {
+	//		throw new RuntimeException(e);
+	//	}
 
 	}
 	
