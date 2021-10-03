@@ -3,6 +3,8 @@ package Serralheria;
 
 public class FormaPagamento implements Calculos {
 
+	private Pessoa pessoa ;
+	private int id;
 	private int tipopagamento;
 	private double especie ;
 	private double credito;
@@ -236,5 +238,21 @@ public class FormaPagamento implements Calculos {
 		else {
 			return 0;
 		}
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 }

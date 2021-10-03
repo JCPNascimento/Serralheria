@@ -3,6 +3,7 @@ package Serralheria;
 
 public class Tecnico extends Pessoa {
 	private double codcesso = 3030;
+	private Pessoa pessoa;
 
 	public Tecnico(String nome, String telefone, String cpf, int codcesso) {
 		super(nome, telefone, cpf, null);
@@ -29,5 +30,11 @@ public class Tecnico extends Pessoa {
 	}
 	public String toString() {
 		return"Alunos: \n"+getNome()+"\nCPF: \n"+getCpf();
+	}
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 }

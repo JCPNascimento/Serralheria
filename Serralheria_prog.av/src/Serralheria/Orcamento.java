@@ -2,6 +2,7 @@ package Serralheria;
 
 
 public class Orcamento {
+	private int id;
 	private double $aluminio;
 	private double altura;
 	private double largura;
@@ -72,5 +73,11 @@ public class Orcamento {
 	@Override
 	public String toString() {
 		return"[ "+getAltura()+" "+getLargura()+" "+getMetrosqd()+" "+getTotal()+" ]";
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 }
