@@ -242,9 +242,9 @@ public class Home {
 			System.out.println("****************************************************************");
 
 			Pedido pedido = new Pedido(menu);
-
+			
 			int j = 0;
-
+			int p =0;
 			do {
 
 				try {
@@ -269,26 +269,41 @@ public class Home {
 
 
 				do {
-					try {
+                    try {
+                        do {
+                        System.out.println("TIPO DE SERVICO A SER EXECUTADO ");
+                        System.out.println("1- JANELA| 2- PORTA  | 3 - PORT�O | 4 - TOLDO");
+                        int rec = dadosc.nextInt();
+                        if(rec == 1 || rec == 2 || rec ==3 || rec == 4) {
+                            pedido.settipopedido(rec);
+                            j++;
+                            p++;
 
-						System.out.println("TIPO DE SERVI�O A SER EXECUTADO ");
-						System.out.println("1- JANELA| 2- PORTA  | 3 - PORT�O | 4 - TOLDO");
-						pedido.settipopedido(dadosc.nextInt());
-						j++;
-					}catch(InputMismatchException e){
+                        }else {
+                            System.out.println("**");
+                            System.out.println("Ops, Digite um número valido.");
+                            System.out.println("**");
 
-						System.out.println("****************************************************************");
-						System.out.println("Ops, Digite um número valido.");
-						System.out.println("****************************************************************");
+                        }
 
-					}
-					dadosc.nextLine();
-				}while(j==0 );
+                         }while(p == 0);
 
-				j=0;
+                    }catch(InputMismatchException e){
+
+                        System.out.println("**");
+                        System.out.println("Ops, Digite um número valido.");
+                        System.out.println("**");
+
+                    }
+                    dadosc.nextLine();
+
+                }while(j==0 );
+
+                j=0;
 
 				Scanner orcamento = new Scanner(System.in);
 
+				
 				do {	
 					do {
 
@@ -535,23 +550,33 @@ public class Home {
 				}
 			}
 
-			do {
-				try {
+			do{
+	            do {
+	                try {
 
-					System.out.println("1- ENCERRAR | 2 -ACESSO FUNCIONARIO");
-					menu = new Scanner(System.in).nextInt();
-					j++;
+	                    System.out.println("1- ENCERRAR | 2 -ACESSO FUNCIONARIO");
+	                    menu = new Scanner(System.in).nextInt();
+	                    j++;
 
-				} catch(InputMismatchException e) {
-					System.out.println("****************************************************************");
-					System.out.println("voce nao pode digitar letras nesse campo!");
-					System.out.println("****************************************************************");
+	                } catch(InputMismatchException e) {
+						System.out.println("****************************************************************");
+	                    System.out.println("Ops, Voce nao pode digitar letras nesse campo!");
+						System.out.println("****************************************************************");
 
-				}
+	                }
+           }while(j==0);
 
-			}while(j==0);
+	            if(menu != 1 && menu!=2) {
+	                j=0;
 
-			j = 0;
+	                    System.out.println("****************************************************************");
+	                    System.out.println("Ops...Digite 1 para Encerrar ou 2 Para Acesso funcionario");
+	                	System.out.println("****************************************************************");
+	            }
+
+	         }while(menu != 1 && menu!=2);
+
+	            j = 0;
 
 			switch (menu) {
 			case 1: 
@@ -611,8 +636,6 @@ public class Home {
 
 		}
 	}
-
-
 
 	public static boolean validarcodigo(String codigo){
 
