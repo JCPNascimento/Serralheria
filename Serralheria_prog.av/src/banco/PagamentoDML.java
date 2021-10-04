@@ -11,7 +11,15 @@ import Serralheria.Pessoa;
 public class PagamentoDML {
 	private Connection banco;
 	FormaPagamento pagamento = new FormaPagamento();
-
+	public Connection Conecta() {
+		ConnectionFactory conexao = new ConnectionFactory();
+		try {
+			banco = conexao.getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return banco;
+	}
 	private FormaPagamento montarObjeto(ResultSet rs) throws SQLException {
 
 		int idPessoa = rs.getInt("ID_PESSOA");
@@ -26,17 +34,16 @@ public class PagamentoDML {
 		return pagamento;
 	}
 
-	public void insertPagamento(FormaPagamento dados) {
+	public void insertPagamento(FormaPagamento dados, int id_pessoa) {
 
 		try {
 			String sql = "INSERT INTO PAGAMENTO(TIPO_PAGAMENTO,VALOR_TOTAL,ID_PESSOA) VALUES(?,?,?)";
 			PreparedStatement pc = banco.prepareStatement(sql);
 			pc.setDouble(1, dados.getTipopagamento());
 			pc.setDouble(2, dados.getValortot());
-			pc.setInt(3, dados.getPessoa().getId());
+			pc.setInt(3, id_pessoa);
 			pc.execute();
 			pc.close();
-			System.out.println("Dados inseridos com sucesso");
 		} catch (SQLException u) {
 			throw new RuntimeException(u);
 		}

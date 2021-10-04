@@ -16,61 +16,52 @@ public class PessoaDML {
 		ConnectionFactory conexao = new ConnectionFactory();
 		try {
 			banco = conexao.getConnection();
-			System.out.println("Banco conectado com sucesso.");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Não foi possivel conecta ao banco.");
 		}
 		return banco;
 	}
 
 	private Pessoa montarObjeto(ResultSet rs) throws SQLException {
-
-		int idEndereco = rs.getInt("ID_ENDERECO");
-		EnderecoDML dao = new EnderecoDML();
-		Endereco endereco = dao.buscarPorId(idEndereco);
-		pessoa.setEndereco(endereco);
-
+		
 		pessoa.setId(rs.getInt("ID_PESSOA"));
 		pessoa.setNome(rs.getString("NOME"));
 		pessoa.setCpf(rs.getString("CPF"));
 		pessoa.setTelefone(rs.getString("TELEFONE"));
+		
+
 
 		return pessoa;
 	}
 
-	public void InsertPessoa(Pessoa dados) {
+	public void InsertPessoa(Pessoa dados, int i) {
 
 		try {
-			String sql = "INSERT INTO PESSOA(NOME,TELEFONE,CPF,ID_ENDERECO) VALUES(?,?,?,?)";
+			String sql = "INSERT INTO PESSOA(NOME,CPF,TELEFONE,ID_ENDERECO) VALUES(?,?,?,?)";
 			PreparedStatement pc = banco.prepareStatement(sql);
+			
 			pc.setString(1, dados.getNome());
 			pc.setString(2, dados.getCpf());
 			pc.setString(3, dados.getTelefone());
-			pc.setInt(4, dados.getEndereco().getId());
+			pc.setInt(4, i);
 			pc.execute();
-			pc.close();
-			System.out.println("Dados inseridos com sucesso");
+			dados.setId(selectPessoa(dados).getId());
 		} catch (SQLException u) {
 			throw new RuntimeException(u);
 		}
 	}
 
-	public Pessoa selectPessoa(int cpf) {
+	public Pessoa selectPessoa(Pessoa pessoa) {
 		try {
 
-			PreparedStatement stmt = this.banco.prepareStatement("SELECT * FROM PESSOA where CPF = ?");
-			stmt.setInt(1, cpf);
+			PreparedStatement stmt = this.banco.prepareStatement("SELECT * FROM PESSOA");
+
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 
 				pessoa = montarObjeto(rs);
 			}
-
-			rs.close();
-			stmt.close();
-			banco.close();
 
 			return pessoa;
 
@@ -87,7 +78,7 @@ public class PessoaDML {
 			deleta.setInt(1, id);
 
 			deleta.executeUpdate();
-			deleta.close();
+			//deleta.close();
 
 		} catch (SQLException x) {
 			throw new RuntimeException(x);
@@ -107,9 +98,6 @@ public class PessoaDML {
 				pessoa = montarObjeto(rs);
 			}
 
-			rs.close();
-			stmt.close();
-			banco.close();
 			return pessoa;
 
 		} catch (SQLException e) {

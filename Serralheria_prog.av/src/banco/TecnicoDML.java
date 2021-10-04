@@ -17,10 +17,8 @@ public class TecnicoDML {
 		ConnectionFactory conexao = new ConnectionFactory();
 		try {
 			banco = conexao.getConnection();
-			System.out.println("Banco conectado com sucesso.");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Não foi possivel conecta ao banco.");
 		}
 		return banco;
 	}
@@ -39,16 +37,16 @@ public class TecnicoDML {
 		return tecnico;
 	}
 
-	public void insertTecnico(Tecnico dados) {
+	public void insertTecnico(Tecnico dados, int id_pessoa) {
 
 		try {
 			String sql = "INSERT INTO TECNICO(ID_PESSOA,CODIGO_ACESSO) VALUES(?,?)";
 			PreparedStatement pc = banco.prepareStatement(sql);
-			pc.setInt(1, dados.getPessoa().getId());
+			pc.setInt(1, id_pessoa);
+			//pc.setInt(1, dados.getPessoa().getId());
 			pc.setDouble(2, dados.getCodcesso());
 			pc.execute();
 			pc.close();
-			System.out.println("Dados inseridos com sucesso");
 		} catch (SQLException u) {
 			throw new RuntimeException(u);
 		}

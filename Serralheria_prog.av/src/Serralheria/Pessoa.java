@@ -12,18 +12,20 @@ public class Pessoa {
 		this.telefone = null;
 		this.Cpf = null;
 	}
-	public Pessoa(String nome, String telefone, String cpf, Endereco endereco) {
+	public Pessoa(int id, String nome, String telefone, String cpf, Endereco endereco) {
 		this.telefone = telefone;
 		Cpf = cpf;
 	}
 	public String getTelefone() {
-		return "Telefone: "+ telefone;
+	//	return "Telefone: "+ telefone;
+		return telefone;
 	}
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 	public String getCpf() {
-		return "CPF:"+Cpf;
+		//return "CPF:"+Cpf;
+		return Cpf;
 	}
 	public void setCpf(String cpf) {
 		Cpf = cpf;

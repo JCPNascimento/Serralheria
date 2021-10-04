@@ -19,10 +19,9 @@ public class ClienteDML {
 		ConnectionFactory conexao = new ConnectionFactory();
 		try {
 			banco = conexao.getConnection();
-			System.out.println("Banco conectado com sucesso.");
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Não foi possivel conecta ao banco.");
 		}
 		return banco;
 	}
@@ -44,15 +43,14 @@ public class ClienteDML {
 		return cliente;
 	}
 
-	public void insertCliente(Cliente dados) {
+	public void insertCliente(Pessoa cliente, int id_endereco) {
 		try {
 			String sql = "INSERT INTO CLIENTE(ID_PESSOA,ID_ENDERECO) VALUES(?,?)";
 			PreparedStatement pc = banco.prepareStatement(sql);
-			pc.setInt(1, dados.getPessoa().getId());
-			pc.setInt(2, dados.getEndereco().getId());
+			pc.setInt(1, cliente.getId());
+			pc.setInt(2, id_endereco);
 			pc.execute();
 			pc.close();
-			System.out.println("Dados inseridos com sucesso");
 		} catch (SQLException u) {
 			throw new RuntimeException(u);
 		}
@@ -96,4 +94,6 @@ public class ClienteDML {
 		}
 
 	}
+
+	
 }

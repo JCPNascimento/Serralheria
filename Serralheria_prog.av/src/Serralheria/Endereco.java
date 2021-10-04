@@ -16,7 +16,7 @@ public class Endereco {
 		super();
 	}
 	
-	public Endereco(String rua, String pontRefe, String estado, String cidade, String bairro, String numero, String cep) {
+	public Endereco(int id, String rua, String pontRefe, String estado, String cidade, String bairro, String numero, String cep) {
 		super();
 		this.rua = rua;
 		PontRefe = pontRefe;
@@ -28,7 +28,8 @@ public class Endereco {
 	}	
 	
 	public String getRua() {
-		return "Rua: "+rua;
+		return rua;
+		//return "Rua: "+rua;
 	}
 
 	public void setRua(String rua) {
@@ -36,7 +37,8 @@ public class Endereco {
 	}
 
 	public String getPontRefe() {
-		return "Ponto de Referencia: "+PontRefe;
+		//return "Ponto de Referencia: "+PontRefe;
+		return PontRefe;
 	}
 
 	public void setPontRefe(String pontRefe) {
@@ -44,7 +46,8 @@ public class Endereco {
 	}
 
 	public String getEstado() {
-		return "Estado: "+estado;
+		//return "Estado: "+estado;
+		return estado;
 	}
 
 	public void setEstado(String estado) {
@@ -52,7 +55,8 @@ public class Endereco {
 	}
 
 	public String getCidade() {
-		return "Cidade: "+cidade;
+		//return "Cidade: "+cidade;
+		return cidade;
 	}
 
 	public void setCidade(String cidade) {
@@ -60,7 +64,8 @@ public class Endereco {
 	}
 
 	public String getBairro() {
-		return "Bairro: "+bairro;
+		//return "Bairro: "+bairro;
+		return bairro;
 	}
 
 	public void setBairro(String bairro) {
@@ -68,7 +73,8 @@ public class Endereco {
 	}
 
 	public String getNumero() {
-		return "Numero: "+numero;
+		//return "Numero: "+numero;
+		return numero;
 	}
 
 	public void setNumero(String string) {
@@ -76,7 +82,8 @@ public class Endereco {
 	}
 
 	public String getCep() {
-		return "CEP: "+cep;
+		//return "CEP: "+cep;
+		return cep;
 	}
 
 	public void setCep(String d) {

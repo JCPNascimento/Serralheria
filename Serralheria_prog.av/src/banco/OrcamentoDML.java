@@ -15,10 +15,8 @@ public class OrcamentoDML {
 		ConnectionFactory conexao = new ConnectionFactory();
 		try {
 			banco = conexao.getConnection();
-			System.out.println("Banco conectado com sucesso.");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Não foi possivel conecta ao banco.");
 		}
 		return banco;
 	}
@@ -36,10 +34,10 @@ public class OrcamentoDML {
 		return orcamento;
 	}
 
-	public void insertOrcamento(Orcamento dados) {
+	public void insertOrcamento(Orcamento dados, int id_pessoa) {
 
 		try {
-			String sql = "INSERT INTO ORCAMENTO(ALUMINIO,ALTURA,LARGURA,METROS,TIPO_MATERIAL,TOTAL) VALUES(?,?,?,?,?,?)";
+			String sql = "INSERT INTO ORCAMENTO(ALUMINIO,ALTURA,LARGURA,METROS,TIPO_MATERIAL,TOTAL, ID_PESSOA) VALUES(?,?,?,?,?,?,?)";
 			PreparedStatement pc = banco.prepareStatement(sql);
 			pc.setDouble(1, dados.get$aluminio());
 			pc.setDouble(2, dados.getAltura());
@@ -47,9 +45,9 @@ public class OrcamentoDML {
 			pc.setDouble(4, dados.getMetrosqd());
 			pc.setDouble(5, dados.getTipmaterial());
 			pc.setDouble(6, dados.getTotal());
+			pc.setDouble(7, id_pessoa);
 			pc.execute();
 			pc.close();
-			System.out.println("Dados inseridos com sucesso");
 		} catch (SQLException u) {
 			throw new RuntimeException(u);
 		}

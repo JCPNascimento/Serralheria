@@ -5,8 +5,8 @@ public class Tecnico extends Pessoa {
 	private double codcesso = 3030;
 	private Pessoa pessoa;
 
-	public Tecnico(String nome, String telefone, String cpf, int codcesso) {
-		super(nome, telefone, cpf, null);
+	public Tecnico(int id, String nome, String telefone, String cpf, int codcesso) {
+		super(id,nome, telefone, cpf, null);
 		this.codcesso = codcesso;
 	}
 	public Tecnico() {

@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
-
 	public Connection getConnection() throws SQLException {
 
 		String nomeBanco = "serralheria"; // Nome do banco
@@ -21,5 +20,6 @@ public class ConnectionFactory {
 		return DriverManager.getConnection(
 				"jdbc:mysql://localhost:3306/" + nomeBanco + "?useTimezone=true&serverTimezone=UTC", usuario, senha);
 	}
+	
 
 }

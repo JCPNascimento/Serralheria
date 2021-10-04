@@ -15,10 +15,8 @@ public class EnderecoDML {
 		ConnectionFactory conexao = new ConnectionFactory();
 		try {
 			banco = conexao.getConnection();
-			System.out.println("Banco conectado com sucesso.");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Não foi possivel conecta ao banco.");
 		}
 		return banco;
 	}
@@ -48,30 +46,24 @@ public class EnderecoDML {
 			pc.setString(5, dados.getPontRefe());
 			pc.setString(6, dados.getNumero());
 			pc.setString(7, dados.getCep());
+			pc.execute();
+			dados.setId(selectEndereco().getId());
 
-			pc.execute(); 
-			pc.close();
-			System.out.println("Dados inseridos com sucesso");
 		} catch (SQLException u) {
 			throw new RuntimeException(u);
 		}
 	}
 
-	public Endereco selectEndereco(String id) {
+	public Endereco selectEndereco() {
 		try {
 
-			PreparedStatement stmt = this.banco.prepareStatement("SELECT * FROM ENDERECO where ID_ENDERECO = ?");
-			stmt.setString(1, id);
+			PreparedStatement stmt = this.banco.prepareStatement("SELECT * FROM ENDERECO");
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 
 				endereco = montarObjeto(rs);
 			}
-
-			rs.close();
-			stmt.close();
-			banco.close();
 
 			return endereco;
 
@@ -89,28 +81,26 @@ public class EnderecoDML {
 			deleta.setInt(1, var);
 
 			deleta.executeUpdate();
-			deleta.close();
+			//deleta.close();
 
 		} catch (SQLException x) {
 			throw new RuntimeException(x);
 		}
 
 	}
+
 	public Endereco buscarPorId(int id) {
 		try {
 
-			PreparedStatement stmt = banco.prepareStatement("SELECT * FROM ENDERECO where ID_ENDERECO = ?");
+			PreparedStatement stmt = this.banco.prepareStatement("SELECT * FROM ENDERECO where ID_ENDERECO = ?");
 			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
 
 			Endereco endereco = null;
-			if(rs.next()) {
+			if (rs.next()) {
 				endereco = montarObjeto(rs);
 			}
 
-			rs.close();
-			stmt.close();
-			banco.close();
 			return endereco;
 
 		} catch (SQLException e) {
